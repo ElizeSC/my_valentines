@@ -7,34 +7,87 @@
   font-display: swap;
 }
 
-#container1{
-  align-items: center;
-  background: pink;
-  border-radius: 20px;
-  padding: 5px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.home{
+
+body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden; /* Prevents accidental side-scrolling */
+}
+
+#heart:hover {
+  transform: scale(1.05); /* Makes it interactive! */
+}
+
+#container1 {
+  width: 85%;
+  max-width: 500px;
+  min-height: 70vh;
+  padding: 40px;
+  border-radius: 2px;
+  background-color: #ffafbd;
+  box-shadow:
+    0 1px 1px rgba(0,0,0,0.1),
+    0 10px 20px rgba(0,0,0,0.05);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: izzy_font;
+  transform: rotate(-1deg);
+}
+
+.home {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'izzy_font', cursive;
   text-align: center;
   min-height: 100vh;
   width: 100%;
+  /*background: radial-gradient(circle, #ffdee9 0%, #ffafbd 100%);*/
+  z-index: 1;
+}
+
+.home::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(#000000 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: -1;
 }
 
 #greeting1{
+  font-size: 3rem;
+}
+
+#greeting2{
   font-size: x-large;
 }
 
 .button{
   font-family: izzy_font;
-
 }
 
 #heart{
-  width: 130px;
-  height: 150px;
+  /* Adding a soft shadow makes the heart "float" off the page */
+  filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.1));
+  transition: transform 0.3s ease;
+  width: 50%;
+  height: 60%;
 }
+
+
