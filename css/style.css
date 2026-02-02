@@ -1,4 +1,40 @@
-#home{
+@font-face {
+  font-family: 'izzy_font';
+  src: url('izzy_font_letters-Regular.woff2') format('woff2'),
+  url('izzy_font_letters-Regular.ttf') format('truetype');
+  font-weight: auto;
+  font-style: normal;
+  font-display: swap;
+}
+
+#container1{
+  align-items: center;
+  background: pink;
+  border-radius: 20px;
+  padding: 5px;
+}
+
+.home{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: izzy_font;
   text-align: center;
-  flex: auto;
+  min-height: 100vh;
+  width: 100%;
+}
+
+#greeting1{
+  font-size: x-large;
+}
+
+.button{
+  font-family: izzy_font;
+
+}
+
+#heart{
+  width: 130px;
+  height: 150px;
 }
