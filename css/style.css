@@ -111,15 +111,18 @@ body {
 
 #letter {
   position: absolute;
-  width: 300px;
-  padding: 40px;
+  width: 80%;
+  max-width: 400px;
   background: #fff;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  z-index: -1; /* Sits behind the envelope */
+  padding: 40px;
+  box-shadow: 0 0 50px rgba(0,0,0,0.5);
   opacity: 0;
-  transition: all 1s ease-out;
-  font-family: 'izzy_font', cursive;
-  transform: translateY(50px); /* Start slightly down */
+  transform: scale(0.8);
+  transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 1001;
+  text-align: center;
+  font-family: 'izzy_font', cursive; /* Use your cute font here! */
+  cursor: default;
 }
 
 /* When this class is added, the letter slides up */
@@ -135,10 +138,13 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  cursor: pointer;
 
   /* Ensure it has a size */
   width: 100vw;
   height: 100vh;
+
+  display: none;
 
   /* JS will change display to flex */
   display: none;
@@ -152,4 +158,16 @@ body {
   width: 300px;  /* Set a manual width to make sure they aren't 0px */
   height: auto;
   cursor: pointer;
+  /* This prevents the 'bold' look by turning off blurry anti-aliasing */
+  shape-rendering: crispEdges;
+  /* Or try this if crispEdges makes it too jagged */
+  vector-effect: non-scaling-stroke;
+}
+
+#envelope-closed path, #envelope-open path {
+  stroke-width: 1px !important;
+}
+
+.dark-overlay {
+  background-color: rgba(0, 0, 0, 0.85); /* Deep dark background */
 }
