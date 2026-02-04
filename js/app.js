@@ -86,28 +86,33 @@ function openEnvelope() {
   const closed = document.getElementById('envelope-closed');
   const open = document.getElementById('envelope-open');
   const letter = document.getElementById('letter');
-  const letterText = document.getElementById('letter-text'); // Targeted text div
+  const letterText = document.getElementById('letter-text');
   const container = document.getElementById('envelope-container');
+  const helperText = document.getElementById('click-me-text');
 
   if (letter.classList.contains('letter-reveal')) return;
 
-  // decode and Inject the message
+  // 1. Instantly hide the "click to open" text
+  if (helperText) helperText.classList.add('hidden-text');
+
+  // 2. THE SMART DECODER: Handles emojis, smart quotes, and symbols
   if (activeMessage) {
     try {
-      // handles emojis and other symbols
+      // This combo of decodeURIComponent and escape allows
+      // JavaScript to read UTF-8 characters from a Base64 string
       const decoded = decodeURIComponent(escape(atob(activeMessage)));
       letterText.innerHTML = decoded;
     } catch (e) {
+      console.warn("UTF-8 decoding failed, falling back to standard atob.");
       letterText.innerHTML = atob(activeMessage);
     }
   }
 
-  // opens the envelope
+  // 3. Swap images and start animation
   closed.style.display = "none";
   open.style.display = "block";
   container.style.cursor = "default";
 
-  // transition
   setTimeout(() => {
     container.classList.add('dark-overlay');
     open.style.transition = "opacity 0.8s ease";
@@ -118,4 +123,26 @@ function openEnvelope() {
       letter.classList.add('letter-reveal');
     }, 400);
   }, 600);
+}
+
+function closeEnvelope() {
+  const letter = document.getElementById('letter');
+  const container = document.getElementById('envelope-container');
+  const closed = document.getElementById('envelope-closed');
+  const open = document.getElementById('envelope-open');
+
+  // 1. Hide the letter first
+  letter.classList.remove('letter-reveal');
+
+  // 2. Wait for letter to shrink, then fade the dark background
+  setTimeout(() => {
+    container.classList.remove('dark-overlay');
+
+    // 3. Reset the envelope so it's ready to be opened again
+    open.style.display = "none";
+    open.style.opacity = "1"; // Reset opacity for next time
+    closed.style.display = "block";
+
+    location.reload();
+  }, 500);
 }
