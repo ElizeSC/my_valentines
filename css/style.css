@@ -17,11 +17,11 @@
 body {
   width: 100%;
   height: 100%;
-  overflow-x: hidden; /* Prevents accidental side-scrolling */
+  overflow-x: hidden;
 }
 
 #heart:hover {
-  transform: scale(1.05); /* Makes it interactive! */
+  transform: scale(1.05);
 }
 
 #container1 {
@@ -52,7 +52,6 @@ body {
   text-align: center;
   min-height: 100vh;
   width: 100%;
-  /*background: radial-gradient(circle, #ffdee9 0%, #ffafbd 100%);*/
   z-index: 1;
 }
 
@@ -80,10 +79,14 @@ body {
 
 .button{
   font-family: izzy_font;
+  font-size: large;
+}
+
+#button1:hover{
+  cursor: pointer;
 }
 
 #heart{
-  /* Adding a soft shadow makes the heart "float" off the page */
   filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.1));
   transition: transform 0.3s ease;
   width: 50%;
@@ -113,7 +116,7 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0.6); /* Centered and small */
+  transform: translate(-50%, -50%) scale(0.6);
   width: 90%;
   max-width: 450px;
   max-height: 80vh;
@@ -122,15 +125,12 @@ body {
   padding: 40px;
   box-shadow: 0 0 50px rgba(0,0,0,0.5);
   border-radius: 5px;
-
-  /* CRITICAL: Keeps it hidden until the envelope opens */
   opacity: 0;
   visibility: hidden;
   z-index: 2000;
   transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* Make the scrollbar look pretty/subtle */
 #letter::-webkit-scrollbar {
   width: 5px;
 }
@@ -139,11 +139,9 @@ body {
   border-radius: 10px;
 }
 
-/* When this class is added, the letter slides up */
 .letter-reveal {
   opacity: 1 !important;
   visibility: visible !important;
-  /* Brings it to full size and stays centered */
   transform: translate(-50%, -50%) scale(1) !important;
 }
 
@@ -154,9 +152,9 @@ body {
 }
 
 #letter-text {
-  text-align: left; /* Keeps it looking like a real letter */
+  text-align: left;
   font-size: 1.1rem;
-  line-height: 1.8; /* Adds breathing room between lines */
+  line-height: 1.8;
   color: #333;
 }
 
@@ -166,7 +164,7 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  display: none; /* JS will change to flex */
+  display: none;
   align-items: center;
   justify-content: center;
   z-index: 1000;
@@ -175,13 +173,11 @@ body {
 }
 
 #envelope-closed, #envelope-open {
-  display: block; /* Ensure they aren't accidentally hidden */
-  width: 300px;  /* Set a manual width to make sure they aren't 0px */
+  display: block;
+  width: 300px;
   height: auto;
   cursor: pointer;
-  /* This prevents the 'bold' look by turning off blurry anti-aliasing */
   shape-rendering: crispEdges;
-  /* Or try this if crispEdges makes it too jagged */
   vector-effect: non-scaling-stroke;
 }
 
@@ -190,5 +186,5 @@ body {
 }
 
 .dark-overlay {
-  background-color: rgba(0, 0, 0, 0.85); /* Deep dark background */
+  background-color: rgba(0, 0, 0, 0.85);
 }
