@@ -187,6 +187,22 @@ body {
   color: #333;
 }
 
+.letter-link {
+  color: #ff748c; /* Your signature pink */
+  text-decoration: none;
+  font-weight: bold;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.letter-link:hover {
+  color: #d63031;
+  border-bottom: 2px solid #d63031;
+  transform: translateY(-2px);
+}
+
 #envelope-container {
   position: fixed;
   top: 0;
@@ -228,7 +244,7 @@ body {
   font-size: 1rem;
   text-decoration: underline;
   transition: opacity 0.3s ease;
-  width: 100%; /* Centers the text */
+  width: 100%;
   text-align: center;
 }
 
@@ -239,13 +255,13 @@ body {
 
 #click-me-text {
   position: absolute;
-  bottom: 20%; /* Adjust so it sits right under the envelope */
+  bottom: 20%;
   font-family: 'izzy_font', cursive;
   font-size: 1.5rem;
   color: #ff748c;
   text-shadow: 2px 2px 0px white;
   animation: float 2s infinite ease-in-out;
-  pointer-events: none; /* Allows clicks to pass through to the container */
+  pointer-events: none;
   transition: opacity 0.5s ease;
   z-index: 1005;
 }
@@ -255,7 +271,7 @@ body {
   50% { transform: translateY(-10px); }
 }
 
-/* We'll hide this via JS when the envelope opens */
+
 .hidden-text {
   opacity: 0 !important;
 }

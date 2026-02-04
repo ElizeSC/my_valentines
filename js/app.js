@@ -92,15 +92,14 @@ function openEnvelope() {
 
   if (letter.classList.contains('letter-reveal')) return;
 
-  // 1. Instantly hide the "click to open" text
   if (helperText) helperText.classList.add('hidden-text');
 
-  // 2. THE SMART DECODER: Handles emojis, smart quotes, and symbols
+  // THE SMART DECODER: This is what makes your links clickable!
   if (activeMessage) {
     try {
-      // This combo of decodeURIComponent and escape allows
-      // JavaScript to read UTF-8 characters from a Base64 string
+      // Decode Base64 safely for UTF-8 (emojis/quotes)
       const decoded = decodeURIComponent(escape(atob(activeMessage)));
+      // Using .innerHTML allows the <a> tags in your JSON to become real links
       letterText.innerHTML = decoded;
     } catch (e) {
       console.warn("UTF-8 decoding failed, falling back to standard atob.");
@@ -108,10 +107,8 @@ function openEnvelope() {
     }
   }
 
-  // 3. Swap images and start animation
   closed.style.display = "none";
   open.style.display = "block";
-  container.style.cursor = "default";
 
   setTimeout(() => {
     container.classList.add('dark-overlay');
