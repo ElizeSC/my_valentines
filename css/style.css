@@ -197,6 +197,14 @@ body {
   margin-top: 10px;
 }
 
+html, body{
+  cursor: url('cursor.svg'), auto;
+}
+
+button, a, #heart, #envelope-container, #button1 {
+  cursor: url('cursor_active.svg'), pointer;
+}
+
 .letter-link:hover {
   color: #d63031;
   border-bottom: 2px solid #d63031;
