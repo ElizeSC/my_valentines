@@ -45,37 +45,49 @@ function handleHomeClick() {
   }
 }
 
-/**
- * Validates credentials and triggers the "Flying Paper" animation
- */
+let activeMessage = ""; // We'll store the decoded message here later
+
 function checkUnlock() {
   const userField = document.getElementById('username').value.toLowerCase().trim();
   const passField = document.getElementById('password').value.trim();
   const container = document.getElementById('container1');
   const greeting2 = document.getElementById('greeting2');
 
-  // Convert input password to Base64 to compare with vault
-  const encodedPass = btoa(passField);
+  const hashedInput = btoa(passField);
 
-  if (secretVault[userField] === encodedPass) {
-    console.log("Log in successful. Revealing gift...");
+  // 1. Fetch the vault
+  fetch('vault.json')
+    .then(response => response.json())
+    .then(data => {
+      const userData = data[userField];
 
-    // 1. Animate the login card flying away
-    container.style.transition = "all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)";
-    container.style.transform = "translateY(-150%) rotate(15deg)";
-    container.style.opacity = "0";
+      // 2. Check if user exists AND password matches
+      if (userData && userData.key === hashedInput) {
+        console.log("Vault Access Granted.");
 
-    // 2. Wait for fly-away to finish, then show the envelope
-    setTimeout(() => {
-      container.style.display = "none";
-      revealEnvelope();
-    }, 1000);
-  } else {
-    greeting2.textContent = "That's not the key to my heart... 💔";
-    greeting2.style.color = "#d63031";
-  }
+        // Store the scrambled message for the openEnvelope function
+        activeMessage = userData.message;
+
+        // 3. Start the "Flying Paper" exit animation
+        container.style.transition = "all 1s ease-in-out";
+        container.style.transform = "translateY(-150%) rotate(10deg)";
+        container.style.opacity = "0";
+
+        setTimeout(() => {
+          container.style.display = "none";
+          revealEnvelope();
+        }, 1000);
+
+      } else {
+        greeting2.textContent = "That's not the key to my heart... 💔";
+        greeting2.style.color = "#d63031";
+      }
+    })
+    .catch(err => {
+      console.error("Error loading vault:", err);
+      greeting2.textContent = "Vault is currently locked. Try again later!";
+    });
 }
-
 /**
  * Makes the envelope container visible and ready for interaction
  */
@@ -87,27 +99,33 @@ function revealEnvelope() {
   }
 }
 
-/**
- * Orchestrates the Cinematic Transition:
- * Open Envelope -> Darken Screen -> Fade Envelope -> Reveal Letter
- */
 function openEnvelope() {
   const closed = document.getElementById('envelope-closed');
   const open = document.getElementById('envelope-open');
   const letter = document.getElementById('letter');
+  const letterText = document.getElementById('letter-text'); // Targeted text div
   const container = document.getElementById('envelope-container');
 
-  // Safety: If the letter is already revealed, don't restart the animation
   if (letter.classList.contains('letter-reveal')) return;
 
-  // 1. Swap the envelope images
+  // 1. Decode and Inject the message
+  if (activeMessage) {
+    try {
+      // This fancy line handles emojis and smart quotes correctly
+      const decoded = decodeURIComponent(escape(atob(activeMessage)));
+      letterText.innerHTML = decoded;
+    } catch (e) {
+      // If the fancy way fails, fall back to the normal way
+      letterText.innerHTML = atob(activeMessage);
+    }
+  }
+
+  // 2. Open the Envelope
   closed.style.display = "none";
   open.style.display = "block";
-
-  // Make the container stop acting like a button once opened
   container.style.cursor = "default";
 
-  // 2. Cinematic sequence
+  // 3. Cinematic Transition
   setTimeout(() => {
     container.classList.add('dark-overlay');
     open.style.transition = "opacity 0.8s ease";

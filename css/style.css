@@ -111,46 +111,67 @@ body {
 
 #letter {
   position: absolute;
-  width: 80%;
-  max-width: 400px;
-  background: #fff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.6); /* Centered and small */
+  width: 90%;
+  max-width: 450px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: white;
   padding: 40px;
   box-shadow: 0 0 50px rgba(0,0,0,0.5);
+  border-radius: 5px;
+
+  /* CRITICAL: Keeps it hidden until the envelope opens */
   opacity: 0;
-  transform: scale(0.8);
-  transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-  z-index: 1001;
-  text-align: center;
-  font-family: 'izzy_font', cursive; /* Use your cute font here! */
-  cursor: default;
+  visibility: hidden;
+  z-index: 2000;
+  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Make the scrollbar look pretty/subtle */
+#letter::-webkit-scrollbar {
+  width: 5px;
+}
+#letter::-webkit-scrollbar-thumb {
+  background: pink;
+  border-radius: 10px;
 }
 
 /* When this class is added, the letter slides up */
 .letter-reveal {
   opacity: 1 !important;
-  transform: translateY(-150px) !important; /* Adjust based on envelope height */
-  z-index: 2 !important; /* Now it's on top of the envelope */
+  visibility: visible !important;
+  /* Brings it to full size and stays centered */
+  transform: translate(-50%, -50%) scale(1) !important;
+}
+
+.letter-paper{
+  font-family: 'izzy_font', cursive;
+  color: #333;
+  line-height: 1.6;
+}
+
+#letter-text {
+  text-align: left; /* Keeps it looking like a real letter */
+  font-size: 1.1rem;
+  line-height: 1.8; /* Adds breathing room between lines */
+  color: #333;
 }
 
 #envelope-container {
-  /* Use 'fixed' to make sure it ignores everything else and stays centered */
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  cursor: pointer;
-
-  /* Ensure it has a size */
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
-
-  display: none;
-
-  /* JS will change display to flex */
-  display: none;
+  display: none; /* JS will change to flex */
   align-items: center;
   justify-content: center;
-  z-index: 999; /* Put it on the very top layer */
+  z-index: 1000;
+  cursor: pointer;
+  transition: background-color 1s ease;
 }
 
 #envelope-closed, #envelope-open {
