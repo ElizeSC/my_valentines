@@ -1,16 +1,13 @@
 console.log("%cHey! No peeking at my Valentine's code!", "color: red; font-size: 20px; font-weight: bold;");
 
-// state management
 let clickCount = 0;
 
 
-// loads envelope
 document.addEventListener('DOMContentLoaded', () => {
   const envContainer = document.getElementById('envelope-container');
   if (envContainer) envContainer.style.display = "none";
 });
 
-// handles click me
 function handleHomeClick() {
   clickCount++;
   const btn = document.getElementById('button1');
@@ -30,7 +27,7 @@ function handleHomeClick() {
   }
 }
 
-let activeMessage = ""; // stores the decoded message
+let activeMessage = "";
 
 function checkUnlock() {
   const userField = document.getElementById('username').value.toLowerCase().trim();
@@ -94,12 +91,9 @@ function openEnvelope() {
 
   if (helperText) helperText.classList.add('hidden-text');
 
-  // THE SMART DECODER: This is what makes your links clickable!
   if (activeMessage) {
     try {
-      // Decode Base64 safely for UTF-8 (emojis/quotes)
       const decoded = decodeURIComponent(escape(atob(activeMessage)));
-      // Using .innerHTML allows the <a> tags in your JSON to become real links
       letterText.innerHTML = decoded;
     } catch (e) {
       console.warn("UTF-8 decoding failed, falling back to standard atob.");
@@ -128,16 +122,13 @@ function closeEnvelope() {
   const closed = document.getElementById('envelope-closed');
   const open = document.getElementById('envelope-open');
 
-  // 1. Hide the letter first
   letter.classList.remove('letter-reveal');
 
-  // 2. Wait for letter to shrink, then fade the dark background
   setTimeout(() => {
     container.classList.remove('dark-overlay');
 
-    // 3. Reset the envelope so it's ready to be opened again
     open.style.display = "none";
-    open.style.opacity = "1"; // Reset opacity for next time
+    open.style.opacity = "1";
     closed.style.display = "block";
 
     location.reload();

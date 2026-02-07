@@ -99,13 +99,13 @@ body {
   background-color: #fffafb;
 }
 
-/* When you actually click it */
+
 .button:active {
   transform: translateY(4px);
   box-shadow: 0 0px 0px #ff748c;
 }
 
-/* A subtle wiggle to draw the eye */
+
 #button1 {
   animation: gentle-wiggle 3s infinite;
 }
@@ -188,7 +188,7 @@ body {
 }
 
 .letter-link {
-  color: #ff748c; /* Your signature pink */
+  color: #ff748c;
   text-decoration: none;
   font-weight: bold;
   border-bottom: 2px solid transparent;
