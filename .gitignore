@@ -11,3 +11,10 @@ dist
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+
+# Editor / IDE settings
+.idea/
+.vscode/
+*.xml
+.DS_Store

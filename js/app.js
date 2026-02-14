@@ -62,7 +62,7 @@ function checkUnlock() {
 
       } else {
         greeting2.textContent = "That's not the key to my heart... 💔";
-        greeting2.style.color = "#d63031";
+        greeting2.syle.color = "#d63031t";
       }
     })
     .catch(err => {
