@@ -28,4 +28,4 @@ If you are visiting from LinkedIn or my portfolio, please use the following cred
 ## 📬 Connect with Me
 I’m a solid believer in the art and science of innovation—striving to build a world where the heart of technology is human.
 
-[LinkedIn]([https://www.linkedin.com/in/armelizcapawing/](https://www.linkedin.com/in/armelizcapawing/)) | [Email](capawingarmeliz@gmail.com)
+[LinkedIn]([https://www.linkedin.com/in/armelizcapawing/](https://www.linkedin.com/in/armelizcapawing/)) | [Email]([Email](mailto:capawingarmeliz@gmail.com))
